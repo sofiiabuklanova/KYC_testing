@@ -10,7 +10,7 @@
     <properties>
         <!-- Make sure you point to the latest release version: https://github.com/ShaftHQ/SHAFT_ENGINE/releases -->
         <shaft_engine.version>9.2.20250530</shaft_engine.version>
-        <jdk.version>21</jdk.version>
+        <jdk.version>23</jdk.version>
         <aspectjweaver.version>1.9.24</aspectjweaver.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
@@ -19,6 +19,23 @@
         <surefireArgLine></surefireArgLine>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.0</version>
+        </dependency>
         <dependency>
             <groupId>io.github.shafthq</groupId>
             <artifactId>SHAFT_ENGINE</artifactId>

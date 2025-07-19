@@ -1,0 +1,12 @@
+<suite name="KYC Suite" parallel="tests" thread-count="4">
+    <test name="User Registration Tests">
+        <classes>
+            <class name="tests.RegistrationTests"/>
+        </classes>
+    </test>
+    <test name="KYC Tests">
+        <classes>
+            <class name="tests.KYCTests"/>
+        </classes>
+    </test>
+</suite>
