@@ -26,7 +26,6 @@ public class KYCTests extends BaseTest {
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
-        String status1 = status.asString();
         String kycStatus = status.jsonPath().getString("data.kycStatus");
 
         assertTrue(kycStatus.equalsIgnoreCase("no_documents"));
@@ -51,7 +50,6 @@ public class KYCTests extends BaseTest {
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
-        String status1 = status.asString();
         String kycStatus = status.jsonPath().getString("data.kycStatus");
 
         assertTrue(kycStatus.equalsIgnoreCase("no_documents"));
@@ -88,7 +86,6 @@ public class KYCTests extends BaseTest {
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
-        String status1 = status.asString();
         String kycStatus = status.jsonPath().getString("data.kycStatus");
 
         assertTrue(kycStatus.equalsIgnoreCase("no_documents"));
@@ -107,13 +104,12 @@ public class KYCTests extends BaseTest {
     }
 
     @Test
-    public void kycWithTooBigDocument() throws InterruptedException {
+    public void kycWithTooBigDocument() {
         // Register user
         UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
-        String status1 = status.asString();
         String kycStatus = status.jsonPath().getString("data.kycStatus");
 
         assertTrue(kycStatus.equalsIgnoreCase("no_documents"));
@@ -125,13 +121,12 @@ public class KYCTests extends BaseTest {
     }
 
     @Test
-    public void kycWithWrongFormatDocument() throws InterruptedException {
+    public void kycWithWrongFormatDocument() {
         // Register user
         UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
-        String status1 = status.asString();
         String kycStatus = status.jsonPath().getString("data.kycStatus");
 
         assertTrue(kycStatus.equalsIgnoreCase("no_documents"));

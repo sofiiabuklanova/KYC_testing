@@ -6,7 +6,6 @@ import domain.model.UserRequest;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
-import org.jetbrains.annotations.NotNull;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
