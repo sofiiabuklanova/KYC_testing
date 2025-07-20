@@ -12,6 +12,8 @@ import java.io.File;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static tests.TestDataUtil.generateValidPhoneNumber;
+import static tests.TestDataUtil.getValidEmail;
 
 public class KYCTests extends BaseTest {
 
@@ -22,7 +24,10 @@ public class KYCTests extends BaseTest {
     @Test
     public void kycStatusTransitionsToVerified() throws InterruptedException {
         // Register user
-        UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "pass123",
+                generateValidPhoneNumber());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
@@ -46,7 +51,10 @@ public class KYCTests extends BaseTest {
     @Test
     public void kycStatusInvalidAndValidFiles() throws InterruptedException {
         // Register user
-        UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "pass123",
+                generateValidPhoneNumber());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
@@ -82,7 +90,10 @@ public class KYCTests extends BaseTest {
     @Test
     public void kycWithInvalidDocument() throws InterruptedException {
         // Register user
-        UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "pass123",
+                generateValidPhoneNumber());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
@@ -106,7 +117,10 @@ public class KYCTests extends BaseTest {
     @Test
     public void kycWithTooBigDocument() {
         // Register user
-        UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "pass123",
+                generateValidPhoneNumber());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
@@ -123,7 +137,10 @@ public class KYCTests extends BaseTest {
     @Test
     public void kycWithWrongFormatDocument() {
         // Register user
-        UserRequest user = new UserRequest("kycuser" + System.currentTimeMillis() + "@example.com", "pass123", "+" + System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "pass123",
+                generateValidPhoneNumber());
         String userId = userClient.registerUser(user).jsonPath().getString("data.userId");
 
         Response status = kycClient.getKycStatus(userId);
