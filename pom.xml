@@ -8,21 +8,17 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- Make sure you point to the latest release version: https://github.com/ShaftHQ/SHAFT_ENGINE/releases -->
-        <shaft_engine.version>9.2.20250530</shaft_engine.version>
         <jdk.version>23</jdk.version>
-        <aspectjweaver.version>1.9.24</aspectjweaver.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <surefire-testng.version>3.5.3</surefire-testng.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
-        <surefireArgLine></surefireArgLine>
     </properties>
     <dependencies>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.4.0</version>
+            <version>5.5.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -37,9 +33,10 @@
             <version>2.17.0</version>
         </dependency>
         <dependency>
-            <groupId>io.github.shafthq</groupId>
-            <artifactId>SHAFT_ENGINE</artifactId>
-            <version>${shaft_engine.version}</version>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>4.3.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
@@ -79,46 +76,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.aspectj</groupId>
-                                <artifactId>aspectjweaver</artifactId>
-                                <version>${aspectjweaver.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.apache.maven.surefire</groupId>
-                                <artifactId>surefire-testng</artifactId>
-                                <version>${surefire-testng.version}</version>
-                            </dependency>
-                        </dependencies>
-                        <configuration>
-                            <encoding>UTF-8</encoding>
-                            <systemPropertyVariables>
-                                <testng.dtd.http>true</testng.dtd.http>
-                                <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                            </systemPropertyVariables>
-                            <testFailureIgnore>true</testFailureIgnore>
-                            <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
-                            <failIfNoTests>false</failIfNoTests>
-                            <trimStackTrace>false</trimStackTrace>
-                            <useFile>false</useFile>
-                            <argLine>
-                                @{argLine} ${surefireArgLine}
-                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver.version}/aspectjweaver-${aspectjweaver.version}.jar"
-                            </argLine>
-                            <properties>
-                                <property>
-                                    <name>listener</name>
-                                    <value>com.shaft.listeners.TestNGListener</value>
-                                </property>
-                                <property>
-                                    <name>reporter</name>
-                                    <value>
-                                        org.testng.reporters.XMLReporter:generateTestResultAttributes=true,generateGroupsAttribute=true
-                                    </value>
-                                </property>
-                            </properties>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>

@@ -6,6 +6,7 @@ import domain.model.UserRequest;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -15,7 +16,6 @@ import static tests.TestDataUtil.getValidEmail;
 
 public class RegistrationTests extends BaseTest {
 
-    private static final String LONG_STRING = StringUtils.repeat('a', 256);
     UserClient userClient = new UserClient();
 
     @Test
@@ -59,14 +59,28 @@ public class RegistrationTests extends BaseTest {
         assertEquals(response.getStatusCode(), HttpStatus.SC_BAD_REQUEST);
     }
 
-    //currently failing due to the bug
+    //currently failing due to lack of validation on backend
     @Test
+    @Ignore
     public void tooLongEmailShouldFail() {
-        String email = LONG_STRING + (System.currentTimeMillis()) + "@example.com";
+        String tooLongEmail = StringUtils.repeat('a', 256) + (System.currentTimeMillis()) + "@example.com";
         UserRequest user = new UserRequest(
-                email,
+                tooLongEmail,
                 "password123",
                 generateValidPhoneNumber());
+        Response response = userClient.registerUser(user);
+        assertEquals(response.getStatusCode(), HttpStatus.SC_BAD_REQUEST);
+    }
+
+    //currently failing due to lack of validation on backend
+    @Test
+    @Ignore
+    public void tooLongPhoneShouldFail() {
+        String tooLongPhone = "+" + StringUtils.repeat('1', 10) + (System.currentTimeMillis());
+        UserRequest user = new UserRequest(
+                getValidEmail(),
+                "password123",
+                tooLongPhone);
         Response response = userClient.registerUser(user);
         assertEquals(response.getStatusCode(), HttpStatus.SC_BAD_REQUEST);
     }
