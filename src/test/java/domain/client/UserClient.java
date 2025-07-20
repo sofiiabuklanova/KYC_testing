@@ -10,6 +10,7 @@ public class UserClient {
         return given()
                 .header("Content-Type", "application/json")
                 .body(user)
+                .log().all()
                 .when()
                 .post("/users");
     }
